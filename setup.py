@@ -7,4 +7,4 @@ setuptools.setup(name="nn-additional-losses",
                  author_email="shayan.siddiqui89@gmail.com",
                  description="Contains additional losses which are still not part of pytorch standard library",
                  packages=setuptools.find_packages(),
-                 install_requires=[torch, numpy])
+                 install_requires=['torch', 'numpy'])
