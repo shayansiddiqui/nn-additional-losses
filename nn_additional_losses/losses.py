@@ -1,9 +1,7 @@
 import torch
-import numpy as np
-from torch.nn.modules.loss import _Loss, _WeightedLoss
-from torch.autograd import Function, Variable
 import torch.nn as nn
 import torch.nn.functional as F
+from torch.nn.modules.loss import _Loss, _WeightedLoss
 
 
 class DiceCoeff(nn.Module):
@@ -18,6 +16,7 @@ class DiceCoeff(nn.Module):
 
         t = 2 * inter.float() / union.float()
         return t
+
 
 class DiceLoss(_WeightedLoss):
     def forward(self, output, target, weights=None, ignore_index=None):
@@ -72,10 +71,9 @@ class CombinedLoss(_Loss):
 
     def forward(self, input, target, weight):
         # TODO: why?
-        #target = target.type(torch.LongTensor).cuda()
-        input_soft = F.softmax(input, dim = 1)
+        # target = target.type(torch.LongTensor).cuda()
+        input_soft = F.softmax(input, dim=1)
         y2 = torch.mean(self.dice_loss(input_soft, target))
         y1 = torch.mean(torch.mul(self.cross_entropy_loss.forward(input, target), weight))
         y = y1 + y2
         return y
-
