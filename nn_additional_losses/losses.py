@@ -71,6 +71,7 @@ class CrossEntropyLoss2d(_WeightedLoss):
     """
     Standard pytorch weighted nn.CrossEntropyLoss
     """
+
     def __init__(self, weight=None):
         super(CrossEntropyLoss2d, self).__init__()
         self.nll_loss = nn.CrossEntropyLoss(weight)
@@ -89,6 +90,7 @@ class CombinedLoss(_Loss):
     """
     A combination of dice  and cross entropy loss
     """
+
     def __init__(self):
         super(CombinedLoss, self).__init__()
         self.cross_entropy_loss = CrossEntropyLoss2d()
@@ -103,7 +105,6 @@ class CombinedLoss(_Loss):
         :return: scalar
         """
         # TODO: why?
-        # target = target.type(torch.LongTensor).cuda()
         input_soft = F.softmax(input, dim=1)
         y2 = torch.mean(self.dice_loss(input_soft, target))
         y1 = torch.mean(torch.mul(self.cross_entropy_loss.forward(input, target), weight))
