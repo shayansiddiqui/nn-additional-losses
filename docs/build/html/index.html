@@ -1,0 +1,138 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>NN Additional Losses docs &#8212; nn-additional-losses  documentation</title>
+    <link rel="stylesheet" href="_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <script type="text/javascript" src="_static/documentation_options.js"></script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+   
+  <link rel="stylesheet" href="_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="nn-additional-losses-docs">
+<h1>NN Additional Losses docs<a class="headerlink" href="#nn-additional-losses-docs" title="Permalink to this headline">¶</a></h1>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">This is a code documentation which contains losses which are not part of the standard pytorch libary. For installation and usage read the README in <a class="reference external" href="https://github.com/shayansiddiqui/nn-additional-losses">github repo</a></p>
+</div>
+<div class="toctree-wrapper compound">
+</div>
+<span class="target" id="module-losses"></span><p>Addition losses module defines classses which are commonly used particularly in segmentation and are not part of standard pytorch library.</p>
+<dl class="class">
+<dt id="losses.CombinedLoss">
+<em class="property">class </em><code class="descclassname">losses.</code><code class="descname">CombinedLoss</code><a class="headerlink" href="#losses.CombinedLoss" title="Permalink to this definition">¶</a></dt>
+<dd><p>A combination of dice  and cross entropy loss</p>
+<dl class="method">
+<dt id="losses.CombinedLoss.forward">
+<code class="descname">forward</code><span class="sig-paren">(</span><em>input</em>, <em>target</em>, <em>weight</em><span class="sig-paren">)</span><a class="headerlink" href="#losses.CombinedLoss.forward" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>input</strong> – torch.tensor (NxCxHxW)</li>
+<li><strong>target</strong> – torch.tensor (NxHxW)</li>
+<li><strong>weight</strong> – torch.tensor (NxHxW)</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last">scalar</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="losses.CrossEntropyLoss2d">
+<em class="property">class </em><code class="descclassname">losses.</code><code class="descname">CrossEntropyLoss2d</code><span class="sig-paren">(</span><em>weight=None</em><span class="sig-paren">)</span><a class="headerlink" href="#losses.CrossEntropyLoss2d" title="Permalink to this definition">¶</a></dt>
+<dd><p>Standard pytorch weighted nn.CrossEntropyLoss</p>
+<dl class="method">
+<dt id="losses.CrossEntropyLoss2d.forward">
+<code class="descname">forward</code><span class="sig-paren">(</span><em>inputs</em>, <em>targets</em><span class="sig-paren">)</span><a class="headerlink" href="#losses.CrossEntropyLoss2d.forward" title="Permalink to this definition">¶</a></dt>
+<dd><p>:param inputs:torch.tensor (NxC)
+:param targets: torch.tensor (N)
+:return: scalar</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="losses.DiceCoeff">
+<em class="property">class </em><code class="descclassname">losses.</code><code class="descname">DiceCoeff</code><a class="headerlink" href="#losses.DiceCoeff" title="Permalink to this definition">¶</a></dt>
+<dd><p>Dice coeff for individual examples</p>
+<dl class="method">
+<dt id="losses.DiceCoeff.forward">
+<code class="descname">forward</code><span class="sig-paren">(</span><em>input</em>, <em>target</em><span class="sig-paren">)</span><a class="headerlink" href="#losses.DiceCoeff.forward" title="Permalink to this definition">¶</a></dt>
+<dd><p>Forward pass
+:param input: torch.tensor (CxHxW)
+:param target:
+:return: float scaler</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="losses.DiceLoss">
+<em class="property">class </em><code class="descclassname">losses.</code><code class="descname">DiceLoss</code><span class="sig-paren">(</span><em>weight=None</em>, <em>size_average=None</em>, <em>reduce=None</em>, <em>reduction='elementwise_mean'</em><span class="sig-paren">)</span><a class="headerlink" href="#losses.DiceLoss" title="Permalink to this definition">¶</a></dt>
+<dd><p>Dice Loss for a batch of samples</p>
+<dl class="method">
+<dt id="losses.DiceLoss.forward">
+<code class="descname">forward</code><span class="sig-paren">(</span><em>output</em>, <em>target</em>, <em>weights=None</em>, <em>ignore_index=None</em><span class="sig-paren">)</span><a class="headerlink" href="#losses.DiceLoss.forward" title="Permalink to this definition">¶</a></dt>
+<dd><p>output : NxCxHxW Variable
+target :  NxHxW LongTensor
+weights : C FloatTensor
+ignore_index : int index to ignore from loss</p>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+
+
+          </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2018, Shayan Ahmad Siddiqui.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.7.4</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.10</a>
+      
+      |
+      <a href="_sources/index.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+    <a href="https://github.com/shayansiddiqui/nn-additional-losses" class="github">
+        <img style="position: absolute; top: 0; right: 0; border: 0;" src="https://s3.amazonaws.com/github/ribbons/forkme_right_darkblue_121621.png" alt="Fork me on GitHub"  class="github"/>
+    </a>
+    
+
+    
+  </body>
+</html>

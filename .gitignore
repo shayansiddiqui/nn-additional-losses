@@ -1,3 +1,4 @@
 *ipynb_checkpoints
 nn_additional_losses.egg-info/
 *__pycache__*
+*.idea/
