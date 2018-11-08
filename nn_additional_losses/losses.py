@@ -1,3 +1,6 @@
+"""
+Addition losses module defines classses which are commonly used particularly in segmentation and are not part of standard pytorch library.
+"""
 import torch
 import torch.nn as nn
 import torch.nn.functional as F
@@ -11,7 +14,13 @@ class DiceCoeff(nn.Module):
         super(DiceCoeff, self).__init__()
 
     def forward(self, input, target):
-        inter = torch.dot(input, target) + 0.0001
+        """
+        Forward pass
+        :param input: torch.tensor (CxHxW)
+        :param target:
+        :return: float scaler
+        """
+        inter = torch.dot(input, target)
         union = torch.sum(input ** 2) + torch.sum(target ** 2) + 0.0001
 
         t = 2 * inter.float() / union.float()
@@ -19,6 +28,10 @@ class DiceCoeff(nn.Module):
 
 
 class DiceLoss(_WeightedLoss):
+    """
+    Dice Loss for a batch of samples
+    """
+
     def forward(self, output, target, weights=None, ignore_index=None):
         """
             output : NxCxHxW Variable
@@ -55,21 +68,40 @@ class DiceLoss(_WeightedLoss):
 
 
 class CrossEntropyLoss2d(_WeightedLoss):
+    """
+    Standard pytorch weighted nn.CrossEntropyLoss
+    """
     def __init__(self, weight=None):
         super(CrossEntropyLoss2d, self).__init__()
         self.nll_loss = nn.CrossEntropyLoss(weight)
 
     def forward(self, inputs, targets):
+        """
+
+        :param inputs:torch.tensor (NxC)
+        :param targets: torch.tensor (N)
+        :return: scalar
+        """
         return self.nll_loss(inputs, targets)
 
 
 class CombinedLoss(_Loss):
+    """
+    A combination of dice  and cross entropy loss
+    """
     def __init__(self):
         super(CombinedLoss, self).__init__()
         self.cross_entropy_loss = CrossEntropyLoss2d()
         self.dice_loss = DiceLoss()
 
     def forward(self, input, target, weight):
+        """
+
+        :param input: torch.tensor (NxCxHxW)
+        :param target: torch.tensor (NxHxW)
+        :param weight: torch.tensor (NxHxW)
+        :return: scalar
+        """
         # TODO: why?
         # target = target.type(torch.LongTensor).cuda()
         input_soft = F.softmax(input, dim=1)
