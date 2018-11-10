@@ -17,6 +17,8 @@ class DiceCoeff(nn.Module):
 
     def forward(self, input, target):
         """
+        Forward pass
+
         :param input: torch.tensor (CxHxW)
         :param target:
         :return: float scaler
@@ -35,6 +37,8 @@ class DiceLoss(_WeightedLoss):
 
     def forward(self, output, target, weights=None, ignore_index=None):
         """
+        Forward pass
+
         :param output: NxCxHxW Variable
         :param target: NxHxW LongTensor
         :param weights: C FloatTensor
@@ -81,9 +85,10 @@ class CrossEntropyLoss2d(_WeightedLoss):
 
     def forward(self, inputs, targets):
         """
-        :param input: torch.tensor (NxCxHxW)
-        :param target: torch.tensor (NxHxW)
-        :param weight: torch.tensor (NxHxW)
+        Forward pass
+
+        :param inputs: torch.tensor (NxC)
+        :param targets: torch.tensor (N)
         :return: scalar
         """
         return self.nll_loss(inputs, targets)
@@ -101,6 +106,8 @@ class CombinedLoss(_Loss):
 
     def forward(self, input, target, weight):
         """
+        Forward pass
+
         :param input: torch.tensor (NxCxHxW)
         :param target: torch.tensor (NxHxW)
         :param weight: torch.tensor (NxHxW)
