@@ -79,8 +79,9 @@ class CrossEntropyLoss2d(_WeightedLoss):
 
     def forward(self, inputs, targets):
         """
+        Forward pass
 
-        :param inputs:torch.tensor (NxC)
+        :param inputs: torch.tensor (NxC)
         :param targets: torch.tensor (N)
         :return: scalar
         """
@@ -99,6 +100,8 @@ class CombinedLoss(_Loss):
 
     def forward(self, input, target, weight):
         """
+        Forward pass
+
         :param input: torch.tensor (NxCxHxW)
         :param target: torch.tensor (NxHxW)
         :param weight: torch.tensor (NxHxW)
