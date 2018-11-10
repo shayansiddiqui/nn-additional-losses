@@ -44,8 +44,7 @@
 <dl class="method">
 <dt id="losses.CombinedLoss.forward">
 <code class="descname">forward</code><span class="sig-paren">(</span><em>input</em>, <em>target</em>, <em>weight</em><span class="sig-paren">)</span><a class="headerlink" href="#losses.CombinedLoss.forward" title="Permalink to this definition">¶</a></dt>
-<dd><p>Forward pass</p>
-<table class="docutils field-list" frame="void" rules="none">
+<dd><table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
@@ -72,14 +71,14 @@
 <dl class="method">
 <dt id="losses.CrossEntropyLoss2d.forward">
 <code class="descname">forward</code><span class="sig-paren">(</span><em>inputs</em>, <em>targets</em><span class="sig-paren">)</span><a class="headerlink" href="#losses.CrossEntropyLoss2d.forward" title="Permalink to this definition">¶</a></dt>
-<dd><p>Forward pass</p>
-<table class="docutils field-list" frame="void" rules="none">
+<dd><table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
-<li><strong>inputs</strong> – torch.tensor (NxC)</li>
-<li><strong>targets</strong> – torch.tensor (N)</li>
+<li><strong>input</strong> – torch.tensor (NxCxHxW)</li>
+<li><strong>target</strong> – torch.tensor (NxHxW)</li>
+<li><strong>weight</strong> – torch.tensor (NxHxW)</li>
 </ul>
 </td>
 </tr>

@@ -8,7 +8,9 @@ from torch.nn.modules.loss import _Loss, _WeightedLoss
 
 
 class DiceCoeff(nn.Module):
-    """Dice coeff for individual examples"""
+    """
+    Dice coeff for individual examples
+    """
 
     def __init__(self):
         super(DiceCoeff, self).__init__()
@@ -79,10 +81,9 @@ class CrossEntropyLoss2d(_WeightedLoss):
 
     def forward(self, inputs, targets):
         """
-        Forward pass
-
-        :param inputs: torch.tensor (NxC)
-        :param targets: torch.tensor (N)
+        :param input: torch.tensor (NxCxHxW)
+        :param target: torch.tensor (NxHxW)
+        :param weight: torch.tensor (NxHxW)
         :return: scalar
         """
         return self.nll_loss(inputs, targets)
@@ -100,8 +101,6 @@ class CombinedLoss(_Loss):
 
     def forward(self, input, target, weight):
         """
-        Forward pass
-
         :param input: torch.tensor (NxCxHxW)
         :param target: torch.tensor (NxHxW)
         :param weight: torch.tensor (NxHxW)
